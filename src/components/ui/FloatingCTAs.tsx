@@ -21,7 +21,7 @@ export default function FloatingCTAs() {
   return (
     <div className={`fixed bottom-6 right-6 z-50 flex flex-col gap-3 transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0 pointer-events-none'}`}>
       <a 
-        href="tel:+919999999999"
+        href="tel:+917000617811"
         className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:bg-primary/90 transition-colors hover:scale-110 active:scale-95 group relative"
         aria-label="Call us"
       >
@@ -32,7 +32,7 @@ export default function FloatingCTAs() {
       </a>
       
       <a 
-        href="https://wa.me/919999999999"
+        href="https://wa.me/917000617811"
         target="_blank"
         rel="noopener noreferrer"
         className="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg hover:bg-[#20bd5a] transition-all hover:scale-110 active:scale-95 group relative animate-pulse-slow"

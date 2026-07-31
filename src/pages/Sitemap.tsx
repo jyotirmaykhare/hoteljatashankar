@@ -1,6 +1,6 @@
-import React from 'react';
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
+import { useSEO } from '@/lib/seo';
 
 const LINKS = [
   { name: 'Home', path: '/' },
@@ -19,6 +19,13 @@ const LINKS = [
 ];
 
 export default function Sitemap() {
+  useSEO({
+    title: 'Sitemap',
+    description: 'Browse a full list of pages on the Hotel Jatashankar website.',
+    path: '/sitemap',
+    noindex: true,
+  });
+
   return (
     <div className="w-full min-h-screen bg-background pt-32 pb-20">
       <div className="container mx-auto px-4 max-w-4xl">

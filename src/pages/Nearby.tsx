@@ -1,65 +1,113 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Navigation, Clock, Car } from 'lucide-react';
+import { Navigation, Car } from 'lucide-react';
 import FloatingCTAs from '@/components/ui/FloatingCTAs';
+import { useSEO } from '@/lib/seo';
 
 const ATTRACTIONS = [
   {
+    name: 'Jatashankar Temple, Bijawar',
+    distance: '50 km (approx. 1 to 1.5 hours drive)',
+    img: '/jatashankar-temple-bijawar.jpg',
+    width: 1280,
+    height: 960,
+    fallback: '/gallery-exterior-1.jpg',
+    desc: 'A revered Shiva shrine in the forested hills near Bijawar, known as the "Kedarnath of Bundelkhand."',
+    type: 'Temple / Pilgrimage'
+  },
+  {
+    name: 'Bageshwar Dham, Chhatarpur',
+    distance: '25 km (approx. 40 minutes drive)',
+    img: '/bageshwar-dham-chhatarpur.jpg',
+    width: 578,
+    height: 1280,
+    fallback: '/gallery-exterior-1.jpg',
+    desc: 'A widely visited Hanuman temple in Gadha, seat of Bageshwar Dham Sarkar.',
+    type: 'Temple / Pilgrimage'
+  },
+  {
+    name: 'Dhubela Museum, Nowgaon',
+    distance: '15 km (approx. 20-25 minutes drive)',
+    img: '/dhubela-museum-nowgaon.jpg',
+    width: 1080,
+    height: 704,
+    fallback: '/gallery-exterior-1.jpg',
+    desc: 'A lakeside palace museum housing Bundela-era sculptures, arms, and artifacts.',
+    type: 'Museum / Historical'
+  },
+  {
     name: 'Khajuraho Temples',
     distance: '45 km (approx. 1 hour drive)',
-    img: '/khajuraho.jpg',
-    fallback: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    desc: 'UNESCO World Heritage Site famous for its stunning nagara-style architectural symbolism and erotic sculptures built by the Chandela dynasty.',
+    img: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    width: 800,
+    height: 600,
+    fallback: '/gallery-exterior-1.jpg',
+    desc: 'UNESCO World Heritage Site famed for its nagara-style temple architecture and sculptures.',
     type: 'Historical / Temple'
   },
   {
     name: 'Raneh Falls',
     distance: '65 km (approx. 1.5 hours drive)',
     img: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    width: 800,
+    height: 600,
     fallback: '/gallery-exterior-1.jpg',
-    desc: 'A stunning waterfall situated in the Ken river canyon, featuring unique multi-colored crystalline granite rock formations.',
+    desc: 'A dramatic waterfall in the Ken river canyon with multi-colored granite rock formations.',
     type: 'Nature / Waterfall'
   },
   {
     name: 'Panna National Park',
     distance: '70 km (approx. 1.5 hours drive)',
     img: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    width: 800,
+    height: 600,
     fallback: '/gallery-exterior-1.jpg',
-    desc: 'Famous tiger reserve offering wildlife safaris. Home to tigers, leopards, and over 200 species of birds.',
+    desc: 'A tiger reserve offering wildlife safaris, home to tigers, leopards, and 200+ bird species.',
     type: 'Wildlife / Safari'
   },
   {
     name: 'Pandav Falls',
     distance: '55 km (approx. 1 hour 15 mins)',
     img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    width: 800,
+    height: 600,
     fallback: '/gallery-exterior-1.jpg',
-    desc: 'A serene waterfall located inside Panna National Park, believed to be the place where the Pandavas sought refuge during their exile.',
+    desc: 'A serene waterfall inside Panna National Park, linked to the Pandavas\u2019 exile.',
     type: 'Nature / Mythological'
   },
   {
     name: 'Ken Gharial Sanctuary',
     distance: '65 km (approx. 1.5 hours drive)',
     img: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    width: 800,
+    height: 600,
     fallback: '/gallery-exterior-1.jpg',
-    desc: 'A nature reserve dedicated to the conservation of the endangered Indian Gharials (fish-eating crocodiles).',
+    desc: 'A reserve protecting the endangered Indian Gharial (fish-eating crocodile).',
     type: 'Wildlife'
   },
   {
     name: 'Chaturbhuj Temple',
     distance: '45 km (Near Khajuraho)',
-    img: '/khajuraho.jpg',
-    fallback: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    desc: 'One of the prominent temples of the Southern Group in Khajuraho, known for its massive 9-foot tall idol of Lord Vishnu.',
+    img: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    width: 800,
+    height: 600,
+    fallback: '/gallery-exterior-1.jpg',
+    desc: 'A Khajuraho temple known for its massive 9-foot idol of Lord Vishnu.',
     type: 'Temple'
   }
 ];
 
 export default function Nearby() {
+  useSEO({
+    title: 'Nearby Attractions',
+    description: 'Discover top attractions near Hotel Jatashankar in Chhatarpur, including Jatashankar Temple (Bijawar), Bageshwar Dham, Dhubela Museum, and the Khajuraho Temples, all within easy reach of the hotel.',
+    path: '/nearby',
+  });
+
   return (
     <div className="w-full min-h-screen bg-background pt-24 pb-20">
       
       <section className="bg-primary text-primary-foreground py-16 md:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: `url('/khajuraho.jpg')` }} />
+        <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')` }} />
         <div className="absolute inset-0 bg-primary/80" />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <motion.div
@@ -92,6 +140,8 @@ export default function Nearby() {
                     src={place.img}
                     alt={place.name} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    width={place.width}
+                    height={place.height}
                     onError={(e) => { (e.target as HTMLImageElement).src = place.fallback; }}
                   />
                   <div className="absolute top-3 left-3 bg-white/90 backdrop-blur text-primary text-xs font-bold px-2 py-1 rounded shadow-sm">
@@ -121,7 +171,7 @@ export default function Nearby() {
                 Our front desk can arrange reliable local taxis and tour guides for your sightseeing trips.
               </p>
             </div>
-            <a href="tel:+919999999999" className="bg-primary text-primary-foreground px-8 py-3 rounded-md font-semibold hover:bg-primary/90 transition-colors shrink-0 whitespace-nowrap">
+            <a href="tel:+917000617811" className="bg-primary text-primary-foreground px-8 py-3 rounded-md font-semibold hover:bg-primary/90 transition-colors shrink-0 whitespace-nowrap">
               Contact Reception
             </a>
           </div>

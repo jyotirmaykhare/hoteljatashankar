@@ -33,6 +33,11 @@ npm run typecheck
 - **Netlify** — `netlify.toml` is already configured the same way.
 - **GitHub Pages** — build with `npm run build`, then deploy the `dist/` folder (e.g. via `gh-pages` or a GitHub Actions workflow). If hosting under a subpath (e.g. `username.github.io/repo`), set `base: '/repo/'` in `vite.config.ts`.
 
+## Known follow-ups
+
+- **`package-lock.json`**: was trimmed in a network-restricted environment and hasn't been regenerated against the current `package.json` yet. Run `npm install` once locally (with internet access) and commit the updated lockfile before deploying via `npm ci`.
+- **`geo.position` / `GeoCoordinates` in `index.html`**: currently set to Chhatarpur's town-center coordinates (24.9178, 79.5940) as a placeholder. Replace with the hotel's exact pin from Google Maps/Google Business Profile for accurate local-search placement.
+
 ## Notes
 
 - This is a fully static frontend — no backend/API calls are made from the app.

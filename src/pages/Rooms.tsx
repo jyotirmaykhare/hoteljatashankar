@@ -1,15 +1,15 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'wouter';
-import { CheckCircle, Wifi, Wind, Tv, Coffee, Shield, Phone, Bed, Users } from 'lucide-react';
+import { CheckCircle, Wifi, Wind, Coffee, Shield, Phone, Bed, Users } from 'lucide-react';
 import FloatingCTAs from '@/components/ui/FloatingCTAs';
+import { useSEO } from '@/lib/seo';
 
 const ROOMS = [
   {
     id: 'standard',
     name: 'Standard AC Room',
     image: '/room-standard.jpg',
-    fallback: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    imgWidth: 1920,
+    imgHeight: 1280,
     description: 'Perfect for solo travelers or couples looking for a comfortable and budget-friendly stay without compromising on quality and hygiene.',
     occupancy: '2 Adults',
     bedType: 'Queen Size Bed',
@@ -20,38 +20,23 @@ const ROOMS = [
     id: 'deluxe',
     name: 'Deluxe AC Room',
     image: '/room-deluxe.jpg',
-    fallback: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    imgWidth: 1280,
+    imgHeight: 1920,
     description: 'Upgraded spacious rooms with elegant interiors, premium bedding, and a cozy seating area for a more relaxed stay.',
     occupancy: '2 Adults + 1 Child',
     bedType: 'King Size Bed',
     price: 'Contact for pricing',
     amenities: ['Air Conditioning', 'Premium Attached Washroom', 'Hot/Cold Water', 'Free WiFi', 'Flat Screen TV', 'Seating Area', 'Tea/Coffee Maker', 'Room Service']
-  },
-  {
-    id: 'executive',
-    name: 'Executive AC Room',
-    image: '/room-executive.jpg',
-    fallback: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    description: 'Designed for business travelers or those seeking extra luxury. Features a work desk, premium toiletries, and enhanced decor.',
-    occupancy: '2 Adults',
-    bedType: 'King Size Bed',
-    price: 'Contact for pricing',
-    amenities: ['Air Conditioning', 'Luxury Washroom', 'Work Desk', 'Free WiFi', 'Smart TV', 'Tea/Coffee Maker', 'Mini Fridge', 'Express Room Service']
-  },
-  {
-    id: 'family',
-    name: 'Family AC Room',
-    image: '/room-family.jpg',
-    fallback: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    description: 'Generously sized rooms equipped with extra bedding to comfortably accommodate your entire family in a single unit.',
-    occupancy: '4 Adults',
-    bedType: '2 Double Beds',
-    price: 'Contact for pricing',
-    amenities: ['Air Conditioning', 'Large Washroom', 'Hot/Cold Water', 'Free WiFi', 'Large TV', 'Dining Area', 'Wardrobe', 'Room Service']
   }
 ];
 
 export default function Rooms() {
+  useSEO({
+    title: 'Rooms & Suites',
+    description: 'Choose from Standard and Deluxe AC rooms at Hotel Jatashankar in Chhatarpur, each with free WiFi and modern attached washrooms.',
+    path: '/rooms',
+  });
+
   return (
     <div className="w-full flex flex-col bg-background pt-24 pb-20">
       
@@ -90,7 +75,10 @@ export default function Rooms() {
                     src={room.image} 
                     alt={room.name} 
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                    onError={(e) => { (e.target as HTMLImageElement).src = room.fallback; }}
+                    width={room.imgWidth}
+                    height={room.imgHeight}
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 
@@ -132,7 +120,7 @@ export default function Rooms() {
 
                   <div className="flex flex-wrap gap-4 mt-auto">
                     <a 
-                      href="https://wa.me/919999999999" 
+                      href="https://wa.me/917000617811" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="bg-primary text-primary-foreground px-8 py-3 rounded-md font-semibold hover:bg-primary/90 transition-colors shadow-sm flex-1 md:flex-none text-center"
@@ -140,7 +128,7 @@ export default function Rooms() {
                       Enquire via WhatsApp
                     </a>
                     <a 
-                      href="tel:+919999999999"
+                      href="tel:+917000617811"
                       className="bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/20 px-6 py-3 rounded-md font-semibold hover:bg-[#25D366] hover:text-white transition-colors flex items-center justify-center gap-2"
                     >
                       Call Us

@@ -1,6 +1,5 @@
-import React from 'react';
 import { Link } from 'wouter';
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Instagram } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -17,14 +16,8 @@ export default function Footer() {
               Your home away from home in Chhatarpur. Experience refined Indian hospitality, premium AC rooms, and a renowned pure vegetarian family restaurant.
             </p>
             <div className="flex gap-4 mt-2">
-              <a href="#" className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-colors">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-colors">
+              <a href="https://www.instagram.com/jatashankarhotel" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-colors">
                 <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-colors">
-                <Twitter className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -52,11 +45,11 @@ export default function Footer() {
               </li>
               <li className="flex gap-3 text-primary-foreground/80 text-sm items-center">
                 <Phone className="w-5 h-5 text-secondary shrink-0" />
-                <a href="tel:+919999999999" className="hover:text-secondary transition-colors">+91 99999 99999</a>
+                <a href="tel:+917000617811" className="hover:text-secondary transition-colors">+91 70006 17811</a>
               </li>
               <li className="flex gap-3 text-primary-foreground/80 text-sm items-center">
                 <Mail className="w-5 h-5 text-secondary shrink-0" />
-                <a href="mailto:info@hoteljatashankar.com" className="hover:text-secondary transition-colors">info@hoteljatashankar.com</a>
+                <a href="mailto:ashutoshrra2018@gmail.com" className="hover:text-secondary transition-colors">ashutoshrra2018@gmail.com</a>
               </li>
               <li className="flex gap-3 text-primary-foreground/80 text-sm">
                 <Clock className="w-5 h-5 text-secondary shrink-0" />
@@ -74,7 +67,7 @@ export default function Footer() {
             <p className="text-primary-foreground/80 text-sm mb-6">
               Reach out via WhatsApp or call us directly for reservations and inquiries.
             </p>
-            <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" className="inline-block w-full text-center bg-secondary text-primary font-semibold py-3 px-6 rounded-md hover:bg-secondary/90 transition-colors shadow-sm">
+            <a href="https://wa.me/917000617811" target="_blank" rel="noopener noreferrer" className="inline-block w-full text-center bg-secondary text-primary font-semibold py-3 px-6 rounded-md hover:bg-secondary/90 transition-colors shadow-sm">
               WhatsApp Us
             </a>
             

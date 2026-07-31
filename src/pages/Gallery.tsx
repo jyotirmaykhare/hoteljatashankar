@@ -1,28 +1,40 @@
-import React, { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn } from 'lucide-react';
 import FloatingCTAs from '@/components/ui/FloatingCTAs';
+import { useSEO } from '@/lib/seo';
 
 const CATEGORIES = ['All', 'Exterior & Lobby', 'Rooms', 'Restaurant & Food', 'Facilities'];
 
 const IMAGES = [
-  { id: 1, src: '/gallery-exterior-1.jpg', fallback: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Exterior & Lobby', title: 'Hotel Exterior View' },
-  { id: 2, src: '/gallery-lobby-1.jpg', fallback: 'https://images.unsplash.com/photo-1582719478250-c89404bb2a15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Exterior & Lobby', title: 'Elegant Reception Area' },
-  { id: 3, src: '/gallery-lobby-2.jpg', fallback: 'https://images.unsplash.com/photo-1583416750470-965b2707b355?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Exterior & Lobby', title: 'Comfortable Lobby Seating' },
-  { id: 4, src: '/room-standard.jpg', fallback: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Rooms', title: 'Standard AC Room' },
-  { id: 5, src: '/room-deluxe.jpg', fallback: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Rooms', title: 'Deluxe AC Room' },
-  { id: 6, src: '/room-executive.jpg', fallback: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Rooms', title: 'Executive Suite' },
-  { id: 7, src: '/room-family.jpg', fallback: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Rooms', title: 'Spacious Family Room' },
-  { id: 8, src: '/gallery-restaurant-1.jpg', fallback: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Restaurant & Food', title: 'Family Restaurant Interior' },
-  { id: 9, src: '/dish-thali.jpg', fallback: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Restaurant & Food', title: 'Premium Maharaja Thali' },
-  { id: 10, src: '/dish-paneer.jpg', fallback: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Restaurant & Food', title: 'Paneer Butter Masala' },
-  { id: 11, src: '/dish-biryani.jpg', fallback: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Restaurant & Food', title: 'Veg Biryani Special' },
-  { id: 12, src: '/dish-dal.jpg', fallback: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Restaurant & Food', title: 'Dal Makhani' },
-  { id: 13, src: '/gallery-facilities-1.jpg', fallback: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Facilities', title: 'Elegant Corridors' },
-  { id: 14, src: '/gallery-room-1.jpg', fallback: 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', category: 'Facilities', title: 'Comfortable Common Areas' },
+  { id: 1, src: '/gallery-exterior-1.jpg', width: 1280, height: 1920, category: 'Exterior & Lobby', title: 'Hotel Exterior View' },
+  { id: 2, src: '/Front1.jpg', width: 1280, height: 1920, category: 'Exterior & Lobby', title: 'Hotel Front View' },
+  { id: 3, src: '/Entrance.jpg', width: 1280, height: 1920, category: 'Exterior & Lobby', title: 'Main Entrance' },
+  { id: 4, src: '/gallery-lobby-1.jpg', width: 1920, height: 1280, category: 'Exterior & Lobby', title: 'Elegant Reception Area' },
+  { id: 5, src: '/gallery-lobby-2.jpg', width: 1920, height: 1280, category: 'Exterior & Lobby', title: 'Comfortable Lobby Seating' },
+  { id: 6, src: '/Reception1.jpg', width: 1920, height: 1280, category: 'Exterior & Lobby', title: 'Reception Desk' },
+  { id: 7, src: '/room-standard.jpg', width: 1920, height: 1280, category: 'Rooms', title: 'Standard AC Room' },
+  { id: 8, src: '/room-deluxe.jpg', width: 1280, height: 1920, category: 'Rooms', title: 'Deluxe AC Room' },
+  { id: 13, src: '/gallery-restaurant-1.jpg', width: 1920, height: 1280, category: 'Restaurant & Food', title: 'Family Restaurant Interior' },
+  { id: 14, src: '/dish-thali.jpg', width: 1920, height: 1280, category: 'Restaurant & Food', title: 'Premium Maharaja Thali' },
+  { id: 15, src: '/Mixveg.jpg', width: 1280, height: 1920, category: 'Restaurant & Food', title: 'Mixed Veg Curry' },
+  { id: 16, src: '/ThaliPackaged.jpg', width: 1920, height: 1280, category: 'Restaurant & Food', title: 'Dal Makhani' },
+  { id: 17, src: '/Salad1.jpg', width: 1920, height: 1280, category: 'Restaurant & Food', title: 'Fresh Salad' },
+  { id: 18, src: '/Lassi.jpg', width: 1280, height: 1920, category: 'Restaurant & Food', title: 'Sweet Lassi' },
+  { id: 19, src: '/gallery-facilities-1.jpg', width: 1280, height: 1920, category: 'Facilities', title: 'Elegant Corridors' },
+  { id: 20, src: '/gallery-room-1.jpg', width: 1920, height: 1280, category: 'Facilities', title: 'Comfortable Common Areas' },
+  { id: 21, src: '/SofawithAc.jpg', width: 1920, height: 1280, category: 'Facilities', title: 'Comfortable Lounge Seating' },
+  { id: 22, src: '/restaurant-interior.jpg', width: 1920, height: 1280, category: 'Facilities', title: 'Seating Area' },
+  { id: 23, src: '/room-family.jpg', width: 1920, height: 1280, category: 'Facilities', title: 'Spacious Interiors' },
 ];
 
 export default function Gallery() {
+  useSEO({
+    title: 'Photo Gallery',
+    description: 'Browse photos of Hotel Jatashankar\u2019s exterior, lobby, AC rooms, restaurant, and facilities in Chhatarpur.',
+    path: '/gallery',
+  });
+
   const [activeCategory, setActiveCategory] = useState('All');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -40,14 +52,14 @@ export default function Gallery() {
     document.body.style.overflow = 'auto';
   };
 
-  const nextImage = (e: React.MouseEvent) => {
+  const nextImage = (e: MouseEvent) => {
     e.stopPropagation();
     if (lightboxIndex !== null) {
       setLightboxIndex((lightboxIndex + 1) % filteredImages.length);
     }
   };
 
-  const prevImage = (e: React.MouseEvent) => {
+  const prevImage = (e: MouseEvent) => {
     e.stopPropagation();
     if (lightboxIndex !== null) {
       setLightboxIndex((lightboxIndex - 1 + filteredImages.length) % filteredImages.length);
@@ -108,7 +120,10 @@ export default function Gallery() {
                   src={image.src} 
                   alt={image.title} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  onError={(e) => { (e.target as HTMLImageElement).src = image.fallback; }}
+                  width={image.width}
+                  height={image.height}
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-center">
                   <ZoomIn className="w-8 h-8 text-white mb-2 transform scale-50 group-hover:scale-100 transition-transform duration-300 delay-100" />
@@ -142,7 +157,9 @@ export default function Gallery() {
                 src={filteredImages[lightboxIndex].src} 
                 alt={filteredImages[lightboxIndex].title} 
                 className="max-w-full max-h-[80vh] object-contain rounded-md shadow-2xl"
-                onError={(e) => { (e.target as HTMLImageElement).src = filteredImages[lightboxIndex].fallback; }}
+                width={filteredImages[lightboxIndex].width}
+                height={filteredImages[lightboxIndex].height}
+                decoding="async"
               />
               <p className="text-white/90 text-center mt-4 font-serif text-lg">
                 {filteredImages[lightboxIndex].title}

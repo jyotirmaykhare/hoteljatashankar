@@ -1,15 +1,53 @@
-import React from 'react';
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { MapPin, CheckCircle, ArrowRight, Utensils, Star, ShieldCheck, Phone, Wind, Wifi, ShoppingBag, BellRing } from 'lucide-react';
 import FloatingCTAs from '@/components/ui/FloatingCTAs';
+import { useSEO } from '@/lib/seo';
 
 const FADE_IN = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
+const FAQS = [
+  {
+    q: 'How far is Hotel Jatashankar from the Khajuraho Temples?',
+    a: 'Hotel Jatashankar is about 45 km from the Khajuraho Temples, roughly a 1-hour drive, making it a convenient base for sightseeing.',
+  },
+  {
+    q: 'Does Hotel Jatashankar have AC rooms?',
+    a: 'Yes, all rooms at Hotel Jatashankar are air-conditioned, with options ranging from standard to family rooms.',
+  },
+  {
+    q: 'Is there a vegetarian restaurant at the hotel?',
+    a: 'Yes, Hotel Jatashankar has an in-house pure vegetarian restaurant open from 7:00 AM to 11:00 PM.',
+  },
+  {
+    q: 'Where exactly is Hotel Jatashankar located?',
+    a: 'The hotel is located near the Main Bus Stand in Chhatarpur, Madhya Pradesh 471001, India, making it easily accessible for all travelers.',
+  },
+  {
+    q: 'What time is check-in and check-out?',
+    a: 'Check-in is at 12:00 PM and check-out is at 11:00 AM. The reception desk is open 24/7 for early or late requests.',
+  },
+];
+
 export default function Home() {
+  useSEO({
+    title: 'Hotel Jatashankar | Premium AC Rooms & Pure Veg Restaurant in Chhatarpur',
+    description: 'Hotel Jatashankar offers comfortable AC rooms and a pure vegetarian restaurant near the Main Bus Stand in Chhatarpur — the ideal base for Khajuraho and business travel.',
+    path: '/',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: FAQS.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  });
+
   return (
     <div className="w-full flex flex-col">
       {/* Hero Section */}
@@ -20,7 +58,11 @@ export default function Home() {
             src="/hero-bg.jpg"
             alt="Hotel Jatashankar Exterior"
             className="w-full h-full object-cover object-center"
-            onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1542314831-c6a4d81d7247?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            width="1920"
+            height="1281"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/30" />
         </div>
@@ -44,7 +86,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://wa.me/919999999999"
+                href="https://wa.me/917000617811"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-secondary text-primary px-8 py-3.5 rounded-md font-semibold text-lg hover:bg-secondary/90 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
@@ -52,7 +94,7 @@ export default function Home() {
                 Enquire on WhatsApp
               </a>
               <a
-                href="tel:+919999999999"
+                href="tel:+917000617811"
                 className="bg-white/15 backdrop-blur text-white border border-white/30 px-8 py-3.5 rounded-md font-semibold text-lg hover:bg-white/25 transition-all flex items-center justify-center gap-2"
               >
                 <Phone className="w-5 h-5" /> Call Now
@@ -75,7 +117,10 @@ export default function Home() {
                   src="/gallery-lobby-2.jpg" 
                   alt="Hotel Lobby" 
                   className="w-full h-full object-cover" 
-                  onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1582719478250-c89404bb2a15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; }}
+                  width="1920"
+                  height="1280"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="absolute bottom-10 -right-4 lg:-right-10 w-2/3 aspect-square rounded-full overflow-hidden border-8 border-card shadow-xl z-20">
@@ -83,7 +128,10 @@ export default function Home() {
                   src="/gallery-exterior-1.jpg" 
                   alt="Hotel Exterior" 
                   className="w-full h-full object-cover" 
-                  onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; }}
+                  width="1280"
+                  height="1920"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </motion.div>
@@ -146,12 +194,10 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { id: 'standard', name: 'Standard AC Room', img: '/room-standard.jpg', fallback: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', desc: 'Comfortable stay with all essential amenities.' },
-              { id: 'deluxe', name: 'Deluxe AC Room', img: '/room-deluxe.jpg', fallback: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', desc: 'Spacious room with upgraded furnishings.' },
-              { id: 'executive', name: 'Executive AC Room', img: '/room-executive.jpg', fallback: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', desc: 'Premium comfort for business travelers.' },
-              { id: 'family', name: 'Family AC Room', img: '/room-family.jpg', fallback: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', desc: 'Extra space to accommodate your entire family.' }
+              { id: 'standard', name: 'Standard AC Room', img: '/room-standard.jpg', width: 1920, height: 1280, desc: 'Comfortable stay with all essential amenities.' },
+              { id: 'deluxe', name: 'Deluxe AC Room', img: '/room-deluxe.jpg', width: 1280, height: 1920, desc: 'Spacious room with upgraded furnishings.' }
             ].map((room, i) => (
               <motion.div 
                 key={room.id}
@@ -164,7 +210,10 @@ export default function Home() {
                     src={room.img} 
                     alt={room.name} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                    onError={(e) => { (e.target as HTMLImageElement).src = room.fallback; }}
+                    width={room.width}
+                    height={room.height}
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
@@ -230,19 +279,28 @@ export default function Home() {
                 src="/restaurant-interior.jpg" 
                 alt="Restaurant Interior" 
                 className="rounded-lg object-cover h-64 w-full shadow-md col-span-2" 
-                onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; }}
+                width="1920"
+                height="1280"
+                loading="lazy"
+                decoding="async"
               />
               <img 
                 src="/dish-thali.jpg" 
                 alt="Maharaja Thali" 
                 className="rounded-lg object-cover h-40 w-full shadow-md" 
-                onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'; }}
+                width="1920"
+                height="1280"
+                loading="lazy"
+                decoding="async"
               />
               <img 
-                src="/dish-paneer.jpg" 
-                alt="Paneer Dish" 
+                src="/Mixveg.jpg" 
+                alt="Mixed Veg Curry" 
                 className="rounded-lg object-cover h-40 w-full shadow-md" 
-                onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'; }}
+                width="1280"
+                height="1920"
+                loading="lazy"
+                decoding="async"
               />
             </motion.div>
           </div>
@@ -269,6 +327,23 @@ export default function Home() {
             <Link href="/facilities" className="text-secondary hover:text-white transition-colors text-sm font-semibold tracking-wider uppercase underline underline-offset-4">
               View All Facilities
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section — mirrors the FAQPage structured data in useSEO() above */}
+      <section className="py-16 md:py-24 bg-muted/40">
+        <div className="container mx-auto px-4 md:px-6 max-w-3xl">
+          <h2 className="text-3xl md:text-4xl font-serif text-primary text-center mb-12">
+            Frequently Asked Questions
+          </h2>
+          <div className="flex flex-col gap-6">
+            {FAQS.map((faq) => (
+              <div key={faq.q} className="bg-card rounded-xl border border-border p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-foreground mb-2">{faq.q}</h3>
+                <p className="text-muted-foreground leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

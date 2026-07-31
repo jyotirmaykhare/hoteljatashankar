@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'wouter';
 import { Search, Info, ChefHat, Sparkles } from 'lucide-react';
 import FloatingCTAs from '@/components/ui/FloatingCTAs';
+import { useSEO } from '@/lib/seo';
 
 // Menu data generation - robust enough for search/filter
 const CATEGORIES = [
@@ -82,6 +83,12 @@ const MENU_ITEMS = [
 ];
 
 export default function Menu() {
+  useSEO({
+    title: 'Food Menu',
+    description: 'View the full pure vegetarian menu at Hotel Jatashankar — North Indian, South Indian, Chinese, thalis, and more, served in Chhatarpur.',
+    path: '/menu',
+  });
+
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -225,7 +232,7 @@ export default function Menu() {
             <p className="text-sm text-muted-foreground mt-1">Visit our family restaurant or order to your room.</p>
           </div>
           <div className="flex gap-4 justify-center">
-            <a href="tel:+919999999999" className="bg-white text-primary border border-primary px-6 py-2 rounded-md font-semibold text-sm hover:bg-muted transition-colors">Call to Order</a>
+            <a href="tel:+917000617811" className="bg-white text-primary border border-primary px-6 py-2 rounded-md font-semibold text-sm hover:bg-muted transition-colors">Call to Order</a>
             <Link href="/restaurant" className="bg-primary text-primary-foreground px-6 py-2 rounded-md font-semibold text-sm hover:bg-primary/90 transition-colors">Restaurant Info</Link>
           </div>
         </div>

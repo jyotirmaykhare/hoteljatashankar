@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Menu, X, Phone } from 'lucide-react';
 
@@ -73,13 +73,13 @@ export default function Navbar() {
           {/* Actions */}
           <div className="hidden lg:flex items-center gap-4">
             <a 
-              href="tel:+919999999999" 
+              href="tel:+917000617811" 
               className={`flex items-center gap-2 text-sm font-medium transition-colors ${
                 isScrolled ? 'text-foreground' : 'text-foreground lg:text-white drop-shadow-sm'
               }`}
             >
               <Phone className="w-4 h-4" />
-              <span>+91 99999 99999</span>
+              <span>+91 70006 17811</span>
             </a>
             <Link
               href="/book"
@@ -92,7 +92,7 @@ export default function Navbar() {
               Book Now
             </Link>
             <a 
-              href="https://wa.me/919999999999"
+              href="https://wa.me/917000617811"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-2.5 rounded-md text-sm font-semibold transition-all shadow-sm hover:shadow"
@@ -136,7 +136,7 @@ export default function Navbar() {
               Book Now
             </Link>
             <a
-              href="https://wa.me/919999999999"
+              href="https://wa.me/917000617811"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-primary text-primary-foreground text-center py-3 rounded-md font-semibold mt-2 shadow-sm"

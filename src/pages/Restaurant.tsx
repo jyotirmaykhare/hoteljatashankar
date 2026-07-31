@@ -1,10 +1,34 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'wouter';
 import { ChefHat, Utensils, Clock, ArrowRight, ShieldCheck } from 'lucide-react';
 import FloatingCTAs from '@/components/ui/FloatingCTAs';
+import { useSEO } from '@/lib/seo';
 
 export default function Restaurant() {
+  useSEO({
+    title: 'Restaurant',
+    description: 'Dine at Hotel Jatashankar\u2019s in-house pure vegetarian restaurant in Chhatarpur, serving North Indian, South Indian, and Chinese cuisine in a hygienic setting.',
+    path: '/restaurant',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'Restaurant',
+      name: 'Hotel Jatashankar Restaurant',
+      servesCuisine: ['North Indian', 'South Indian', 'Chinese'],
+      acceptsReservations: 'True',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Near Main Bus Stand',
+        addressLocality: 'Chhatarpur',
+        addressRegion: 'Madhya Pradesh',
+        postalCode: '471001',
+        addressCountry: 'IN',
+      },
+      telephone: '+91-70006-17811',
+      openingHours: 'Mo-Su 07:00-23:00',
+      menu: 'https://hoteljatashankar.com/menu',
+    },
+  });
+
   return (
     <div className="w-full flex flex-col bg-background pt-24 pb-20">
       
@@ -15,7 +39,11 @@ export default function Restaurant() {
             src="/restaurant-interior.jpg" 
             alt="Hotel Jatashankar Restaurant" 
             className="w-full h-full object-cover"
-            onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
+            width="1920"
+            height="1280"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-black/60" />
         </div>
@@ -108,9 +136,9 @@ export default function Restaurant() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { name: 'Paneer Butter Masala', img: '/dish-paneer.jpg', fallback: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', desc: 'Soft cottage cheese cubes in a rich, creamy tomato gravy.', price: '₹260' },
-              { name: 'Dal Makhani', img: '/dish-dal.jpg', fallback: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', desc: 'Slow-cooked black lentils simmered with butter and cream.', price: '₹190' },
-              { name: 'Maharaja Thali', img: '/dish-thali.jpg', fallback: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', desc: 'A grand feast featuring assorted curries, bread, rice, and dessert.', price: '₹350' }
+              { name: 'Paneer Butter Masala', img: '/Mixveg.jpg', width: 1280, height: 1920, desc: 'Soft cottage cheese cubes in a rich, creamy tomato gravy.', price: '₹260' },
+              { name: 'Dal Makhani', img: '/ThaliPackaged.jpg', width: 1920, height: 1280, desc: 'Slow-cooked black lentils simmered with butter and cream.', price: '₹190' },
+              { name: 'Maharaja Thali', img: '/dish-thali.jpg', width: 1920, height: 1280, desc: 'A grand feast featuring assorted curries, bread, rice, and dessert.', price: '₹350' }
             ].map((dish, i) => (
               <motion.div 
                 key={i}
@@ -125,7 +153,10 @@ export default function Restaurant() {
                     src={dish.img} 
                     alt={dish.name} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    onError={(e) => { (e.target as HTMLImageElement).src = dish.fallback; }}
+                    width={dish.width}
+                    height={dish.height}
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold text-primary shadow-sm">
                     {dish.price}
@@ -157,10 +188,10 @@ export default function Restaurant() {
             Our spacious, elegantly lit dining area is designed to host families comfortably. With prompt service, a kid-friendly environment, and large seating arrangements, we make sure your dining experience is as memorable as the food.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+919999999999" className="bg-secondary text-primary px-8 py-3 rounded-md font-semibold hover:bg-secondary/90 transition-colors shadow-sm">
+            <a href="tel:+917000617811" className="bg-secondary text-primary px-8 py-3 rounded-md font-semibold hover:bg-secondary/90 transition-colors shadow-sm">
               Reserve a Table
             </a>
-            <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" className="bg-transparent border-2 border-secondary text-secondary px-8 py-3 rounded-md font-semibold hover:bg-secondary/10 transition-colors">
+            <a href="https://wa.me/917000617811" target="_blank" rel="noopener noreferrer" className="bg-transparent border-2 border-secondary text-secondary px-8 py-3 rounded-md font-semibold hover:bg-secondary/10 transition-colors">
               Pre-order via WhatsApp
             </a>
           </div>

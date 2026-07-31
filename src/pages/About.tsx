@@ -1,10 +1,15 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'wouter';
-import { History, Target, Heart, Award } from 'lucide-react';
+import { Target, Heart } from 'lucide-react';
 import FloatingCTAs from '@/components/ui/FloatingCTAs';
+import { useSEO } from '@/lib/seo';
 
 export default function About() {
+  useSEO({
+    title: 'About Us',
+    description: 'Learn the story behind Hotel Jatashankar — a family-run hotel in Chhatarpur blending traditional Indian hospitality with modern comforts near the Main Bus Stand.',
+    path: '/about',
+  });
+
   return (
     <div className="w-full flex flex-col bg-background pt-24 pb-20">
       
@@ -58,12 +63,12 @@ export default function About() {
             >
               <div className="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl relative z-10 w-4/5 ml-auto">
                 <img src="/gallery-lobby-1.jpg" alt="Hotel Lobby" className="w-full h-full object-cover" 
-                  onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1582719478250-c89404bb2a15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; }}
+                  width="1920" height="1280" loading="lazy" decoding="async"
                 />
               </div>
               <div className="absolute top-10 -left-4 lg:-left-10 w-2/3 aspect-square rounded-xl overflow-hidden shadow-xl z-20 border-8 border-background">
                 <img src="/restaurant-interior.jpg" alt="Restaurant Interior" className="w-full h-full object-cover" 
-                  onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'; }}
+                  width="1920" height="1280" loading="lazy" decoding="async"
                 />
               </div>
             </motion.div>

@@ -1,5 +1,20 @@
-import React from 'react';
 import { Link } from 'wouter';
+import { useSEO } from '@/lib/seo';
+
+const SEO_BY_TYPE = {
+  privacy: {
+    path: '/privacy',
+    description: 'Read Hotel Jatashankar\u2019s privacy policy to understand how we collect, use, and protect your personal data.',
+  },
+  terms: {
+    path: '/terms',
+    description: 'Read the terms and conditions for using Hotel Jatashankar\u2019s website and booking services.',
+  },
+  cancellation: {
+    path: '/cancellation',
+    description: 'Review Hotel Jatashankar\u2019s cancellation and refund policy before booking your stay.',
+  },
+};
 
 export default function Policy({ type }: { type: 'privacy' | 'terms' | 'cancellation' }) {
   const content = {
@@ -83,6 +98,12 @@ export default function Policy({ type }: { type: 'privacy' | 'terms' | 'cancella
   };
 
   const currentContent = content[type];
+
+  useSEO({
+    title: currentContent.title,
+    description: SEO_BY_TYPE[type].description,
+    path: SEO_BY_TYPE[type].path,
+  });
 
   return (
     <div className="w-full min-h-screen bg-background pt-32 pb-20">

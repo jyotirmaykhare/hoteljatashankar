@@ -1,8 +1,7 @@
-import React from 'react';
-import { Link } from 'wouter';
 import { motion } from 'framer-motion';
-import { Wind, Wifi, Car, Phone, ShieldCheck, Clock, CheckCircle2, BedDouble, Droplets, Camera, Utensils, Zap, Bus, Info } from 'lucide-react';
+import { Wind, Wifi, Car, Phone, ShieldCheck, Clock, CheckCircle2, BedDouble, Droplets, Camera, Utensils, Zap, Bus } from 'lucide-react';
 import FloatingCTAs from '@/components/ui/FloatingCTAs';
+import { useSEO } from '@/lib/seo';
 
 const FACILITIES = [
   { id: 'ac', icon: Wind, name: 'Air-Conditioned Rooms', desc: 'Powerful ACs in all rooms for maximum comfort during hot summers.' },
@@ -20,6 +19,12 @@ const FACILITIES = [
 ];
 
 export default function Facilities() {
+  useSEO({
+    title: 'Hotel Facilities',
+    description: 'Explore Hotel Jatashankar\u2019s facilities: air-conditioned rooms, free WiFi, secure parking, 24x7 power backup, CCTV security, and round-the-clock reception.',
+    path: '/facilities',
+  });
+
   return (
     <div className="w-full min-h-screen bg-background pt-24 pb-20">
       
@@ -72,7 +77,7 @@ export default function Facilities() {
           <p className="text-muted-foreground mb-8">
             At Hotel Jatashankar, we take hygiene and security very seriously. The entire premises are monitored, and our staff is trained to provide a safe, respectful environment for all guests, especially families and solo travelers.
           </p>
-          <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" className="bg-primary text-primary-foreground px-8 py-3 rounded-md font-semibold hover:bg-primary/90 transition-colors inline-block">
+          <a href="https://wa.me/917000617811" target="_blank" rel="noopener noreferrer" className="bg-primary text-primary-foreground px-8 py-3 rounded-md font-semibold hover:bg-primary/90 transition-colors inline-block">
             Enquire via WhatsApp
           </a>
         </div>
