@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { CheckCircle, Wifi, Wind, Coffee, Shield, Phone, Bed, Users } from 'lucide-react';
+import { CheckCircle, Wifi, Wind, Shield, Phone, Bed, Users } from 'lucide-react';
 import FloatingCTAs from '@/components/ui/FloatingCTAs';
 import { useSEO } from '@/lib/seo';
 

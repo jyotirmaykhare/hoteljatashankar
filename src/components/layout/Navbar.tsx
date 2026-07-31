@@ -81,16 +81,6 @@ export default function Navbar() {
               <Phone className="w-4 h-4" />
               <span>+91 70006 17811</span>
             </a>
-            <Link
-              href="/book"
-              className={`px-6 py-2.5 rounded-md text-sm font-semibold transition-all border ${
-                isScrolled
-                  ? 'border-primary text-primary hover:bg-primary hover:text-primary-foreground'
-                  : 'border-white/60 text-white hover:bg-white/15'
-              }`}
-            >
-              Book Now
-            </Link>
             <a 
               href="https://wa.me/917000617811"
               target="_blank"
@@ -129,12 +119,6 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/book"
-              className="bg-secondary text-secondary-foreground text-center py-3 rounded-md font-semibold mt-4 shadow-sm"
-            >
-              Book Now
-            </Link>
             <a
               href="https://wa.me/917000617811"
               target="_blank"

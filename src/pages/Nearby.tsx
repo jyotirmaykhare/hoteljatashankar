@@ -83,16 +83,6 @@ const ATTRACTIONS = [
     fallback: '/gallery-exterior-1.jpg',
     desc: 'A reserve protecting the endangered Indian Gharial (fish-eating crocodile).',
     type: 'Wildlife'
-  },
-  {
-    name: 'Chaturbhuj Temple',
-    distance: '45 km (Near Khajuraho)',
-    img: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    width: 800,
-    height: 600,
-    fallback: '/gallery-exterior-1.jpg',
-    desc: 'A Khajuraho temple known for its massive 9-foot idol of Lord Vishnu.',
-    type: 'Temple'
   }
 ];
 

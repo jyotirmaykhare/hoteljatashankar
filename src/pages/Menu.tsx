@@ -1,244 +1,190 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useMemo, useState } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'wouter';
-import { Search, Info, ChefHat, Sparkles } from 'lucide-react';
+import { Info, MapPin, MessageCircle, Phone, Search, Utensils } from 'lucide-react';
 import FloatingCTAs from '@/components/ui/FloatingCTAs';
-import { useSEO } from '@/lib/seo';
+import { SITE_URL, useSEO } from '@/lib/seo';
 
-// Menu data generation - robust enough for search/filter
-const CATEGORIES = [
-  'All', 'Soups', 'Starters', 'Main Course - Paneer', 'Main Course - Veg', 
-  'Dal', 'Breads', 'Rice & Biryani', 'Chinese', 'Desserts', 'Beverages'
+type MenuItem = {
+  id: string;
+  name: string;
+  price: number;
+  category: string;
+  description: string;
+  keywords: string[];
+};
+
+const CATEGORY_DATA: Record<string, string[]> = {
+  Thali: ['Veg Thali|150'],
+  'Main Course': [
+    'Spl. Mix Veg Vegetable|170', 'Paneer Tikka|190', 'Green Pees Masala|160', 'Paneer Reshmi|190', 'Paneer Bhurji|190', 'Paneer Do Pyaja|190', 'Butter Paneer Masala|190', 'Shahi Paneer|190', 'Paneer Pasanda|200', 'Paneer Jaipuri|200', 'Handi Paneer|200', 'Tamatar Paneer Masala|160', 'Shahi Korma|170', 'Chilli Paneer|200', 'Sev Tamatar|170', 'Methi Mutter Malai|170', 'Milk Sev|160', 'Mutter Paneer|190', 'Kadhai Paneer|200', 'Aalu Dum|150', 'Stuffed Tamatar|160', 'Malai Kofta|180', 'Palak Paneer|160', 'Khoya Paneer|180', 'Kaju Curry|220', 'Kaju Paneer|250', 'Chole Masala|160', 'Chole Punjabi|180', 'Chole Paneer|190', 'Paneer Masala|190', 'Aalu Tamatar Fry|140', 'Jeera Aalu|140', 'Mutter Masala|150', 'Tamatar Chatani|140', 'Butter Dal Fry|110', 'Dal Fry|100', 'Dal Tadka|110', 'Dal Sada|70', 'Dal Makhani|140', 'Dal Muglai|130', 'Kadhi Fry|100', 'Papad Dry|15', 'Papad Fry|20', 'Butter Makhan|15', 'Curd Half|50', 'Boondi Raita|100', 'Veg Raita|120', 'Fruit Raita|140', 'Salad|50', 'Kachumar Salad|60',
+  ],
+  Seasonal: ['Gobhi Aalu Masala|120', 'Parval Aalu|120', 'Bhindi Masala|120', 'Baigan Bharta|120', 'Kathal|120', 'Karela|120', 'Methi Aalu|120', 'Aalu Mutter|120', 'Aalu Tamatar|120'],
+  Pulav: ['Mutter Pulav|150', 'Mix Veg Pulav|170', 'Veg Biryani|170', 'Paneer Pulav|180', 'Dal Rice Fry|160', 'Paneer Butter Rice|170', 'Rajma Rice|180', 'Chole Rice|180', 'Punjabi Pulav|160'],
+  Rice: ['Sada Rice|120', 'Jeera Rice|140'],
+  Paratha: ['Aalu Paratha|50', 'Stuffed Paratha|50', 'Aalu Butter Paratha|60', 'Lachha Paratha|50', 'Gobhi Paratha|50', 'Gobhi Butter Paratha|60', 'Paneer Paratha|60', 'Paneer Butter Paratha|70', 'Methi Paratha|50', 'Methi Butter Paratha|60', 'Plain Paratha|35', 'Plain Butter Paratha|40'],
+  'Roti & Naan': ['Tava Roti|10', 'Butter Tava Roti|15', 'Tandoori Roti|10', 'Butter Tandoori Roti|15', 'Butter Naan|40', 'Paneer Naan|45', 'Garlic Naan|50', 'Masala Kulcha|40', 'Paneer Kulcha|50', 'Missi Roti Butter|30'],
+  'Soup & Drinks': ['Tomato Soup|60', 'Chaach Namkeen|35', 'Lassi|50'],
+  Sweets: ['Kheer|50', 'Gajar Halwa|50', 'Ras Malai|35', 'Tea|20', 'Coffee|40', 'Mineral Water|20'],
+  Snacks: ['Chole Roasted|130', 'Mutter Fry|110', 'Paneer Dry|105', 'Paneer Fry|120', 'Papad Masala|30', 'Finger Chips|110', 'Peanut Masala|120', 'Paneer Pakoda|120'],
+  'Ice Cream': ['Butter Scotch|40', 'Choco Vanilla|30', 'Strawberry Cup|15', 'Vanilla Cup|15', 'Senior Chocobar|20', 'Shahi Kulfi|20'],
+};
+
+const CATEGORY_NAMES = Object.keys(CATEGORY_DATA);
+const MAP_URL = 'https://www.google.com/maps/search/?api=1&query=Hotel+Jatashankar+Chhatarpur+Madhya+Pradesh';
+const WHATSAPP_URL = 'https://wa.me/917000617811?text=Hello%20Hotel%20Jatashankar%2C%20I%20would%20like%20to%20order%20food.';
+
+function makeDescription(name: string, category: string) {
+  return `${name} is a freshly prepared pure vegetarian ${category.toLowerCase()} selection at Hotel Jatashankar in Chhatarpur. Cooked with quality ingredients and balanced Indian spices, it is a comforting choice for family lunch, dinner, takeaway, or a relaxed meal at our vegetarian restaurant.`;
+}
+
+function makeKeywords(name: string, category: string) {
+  return [
+    name,
+    `${name} Chhatarpur`,
+    `${category} menu Chhatarpur`,
+    'Pure Veg Restaurant Chhatarpur',
+    'Best Veg Restaurant in Chhatarpur',
+    'Veg Food Chhatarpur',
+    'Family Restaurant Chhatarpur',
+  ];
+}
+
+const MENU_ITEMS: MenuItem[] = CATEGORY_NAMES.flatMap((category) =>
+  CATEGORY_DATA[category].map((entry, index) => {
+    const [name, price] = entry.split('|');
+    return {
+      id: `${category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${index + 1}`,
+      name,
+      price: Number(price),
+      category,
+      description: makeDescription(name, category),
+      keywords: makeKeywords(name, category),
+    };
+  }),
+);
+
+const FAQS = [
+  {
+    question: 'Is Hotel Jatashankar a pure veg restaurant in Chhatarpur?',
+    answer: 'Yes. Hotel Jatashankar serves a 100% pure vegetarian menu, with North Indian favourites, paneer dishes, veg thali, rice, breads, snacks, desserts, and beverages for lunch and dinner.',
+  },
+  {
+    question: 'What is the price of a veg thali at Hotel Jatashankar?',
+    answer: 'The Veg Thali is priced at ₹150. Please call the restaurant for current availability, serving details, and any seasonal updates.',
+  },
+  {
+    question: 'Does the restaurant offer North Indian and Punjabi food?',
+    answer: 'Yes. The menu includes Paneer Butter Masala, Shahi Paneer, Dal Makhani, Chole Punjabi, Kadhai Paneer, parathas, naan, kulcha, and other North Indian vegetarian dishes.',
+  },
+  {
+    question: 'Can I order food or get directions to Hotel Jatashankar?',
+    answer: 'Yes. Use the Call or Order buttons on this page to contact the restaurant, or use Get Directions to find Hotel Jatashankar in Chhatarpur, Madhya Pradesh.',
+  },
 ];
 
-const MENU_ITEMS = [
-  // Soups
-  { id: 1, name: 'Tomato Soup', price: 110, category: 'Soups', veg: true, desc: 'Classic creamy tomato soup served with croutons.' },
-  { id: 2, name: 'Sweet Corn Veg Soup', price: 120, category: 'Soups', veg: true, desc: 'Healthy soup with sweet corn and mixed vegetables.' },
-  { id: 3, name: 'Hot & Sour Soup', price: 130, category: 'Soups', veg: true, spicy: 'Medium', desc: 'Spicy and tangy Chinese style soup.' },
-  { id: 4, name: 'Manchow Soup', price: 130, category: 'Soups', veg: true, spicy: 'Spicy', desc: 'Dark brown soup prepared with various vegetables, thickened with broth and corn flour.' },
-
-  // Starters
-  { id: 5, name: 'Hara Bhara Kabab', price: 190, category: 'Starters', veg: true, popular: true, desc: 'Healthy and delicious vegetarian kababs made with spinach, potatoes and green peas.' },
-  { id: 6, name: 'Paneer Tikka', price: 240, category: 'Starters', veg: true, chefReq: true, desc: 'Cottage cheese marinated in spices and grilled in a tandoor.' },
-  { id: 7, name: 'Veg Manchurian Dry', price: 180, category: 'Starters', veg: true, desc: 'Deep-fried vegetable balls in a soy sauce based gravy.' },
-  { id: 8, name: 'Chilly Paneer Dry', price: 220, category: 'Starters', veg: true, spicy: 'Spicy', desc: 'Crispy paneer chunks tossed in spicy Chinese sauces.' },
-  { id: 9, name: 'Crispy Corn', price: 170, category: 'Starters', veg: true, desc: 'Fried sweet corn kernels tossed with spices.' },
-
-  // Main Course - Paneer
-  { id: 10, name: 'Paneer Butter Masala', price: 260, category: 'Main Course - Paneer', veg: true, popular: true, desc: 'Rich and creamy curry made with paneer, spices, onions, tomatoes, cashews and butter.' },
-  { id: 11, name: 'Kadai Paneer', price: 250, category: 'Main Course - Paneer', veg: true, spicy: 'Medium', desc: 'Paneer and bell peppers cooked in a spicy masala.' },
-  { id: 12, name: 'Palak Paneer', price: 240, category: 'Main Course - Paneer', veg: true, desc: 'Paneer in a thick paste made from puréed spinach and seasoned with garlic and garam masala.' },
-  { id: 13, name: 'Paneer Lababdar', price: 270, category: 'Main Course - Paneer', veg: true, chefReq: true, desc: 'Luscious combination of cottage cheese and exotic gravy.' },
-  { id: 14, name: 'Shahi Paneer', price: 250, category: 'Main Course - Paneer', veg: true, desc: 'Preparation of paneer in a thick gravy made up of cream, tomatoes and spices.' },
-
-  // Main Course - Veg
-  { id: 15, name: 'Mix Veg', price: 210, category: 'Main Course - Veg', veg: true, desc: 'Assorted seasonal vegetables cooked in an Indian curry base.' },
-  { id: 16, name: 'Malai Kofta', price: 240, category: 'Main Course - Veg', veg: true, popular: true, desc: 'Potato and paneer balls served in a smooth, rich creamy gravy.' },
-  { id: 17, name: 'Veg Kolhapuri', price: 220, category: 'Main Course - Veg', veg: true, spicy: 'Spicy', desc: 'Mixed vegetables cooked in a thick spicy Kolhapuri gravy.' },
-  { id: 18, name: 'Bhindi Masala', price: 190, category: 'Main Course - Veg', veg: true, desc: 'Semi-dry okra curry cooked with onions and tomatoes.' },
-  { id: 19, name: 'Jeera Aloo', price: 150, category: 'Main Course - Veg', veg: true, desc: 'Boiled potatoes sautéed in cumin seeds and Indian spices.' },
-
-  // Dal
-  { id: 20, name: 'Dal Fry', price: 140, category: 'Dal', veg: true, desc: 'Yellow lentils cooked and tempered with ghee and spices.' },
-  { id: 21, name: 'Dal Tadka', price: 160, category: 'Dal', veg: true, popular: true, desc: 'Yellow lentils tempered with a smoky ghee and spice infusion.' },
-  { id: 22, name: 'Dal Makhani', price: 190, category: 'Dal', veg: true, chefReq: true, desc: 'Whole black lentils and red kidney beans cooked slowly with butter and cream.' },
-
-  // Breads
-  { id: 23, name: 'Tandoori Roti', price: 20, category: 'Breads', veg: true },
-  { id: 24, name: 'Butter Roti', price: 25, category: 'Breads', veg: true },
-  { id: 25, name: 'Plain Naan', price: 40, category: 'Breads', veg: true },
-  { id: 26, name: 'Butter Naan', price: 50, category: 'Breads', veg: true, popular: true },
-  { id: 27, name: 'Garlic Naan', price: 60, category: 'Breads', veg: true },
-  { id: 28, name: 'Lachha Paratha', price: 55, category: 'Breads', veg: true },
-  { id: 29, name: 'Missi Roti', price: 45, category: 'Breads', veg: true },
-
-  // Rice & Biryani
-  { id: 30, name: 'Plain Rice', price: 110, category: 'Rice & Biryani', veg: true },
-  { id: 31, name: 'Jeera Rice', price: 130, category: 'Rice & Biryani', veg: true, popular: true },
-  { id: 32, name: 'Veg Pulao', price: 170, category: 'Rice & Biryani', veg: true },
-  { id: 33, name: 'Veg Biryani', price: 220, category: 'Rice & Biryani', veg: true, chefReq: true, spicy: 'Medium', desc: 'Aromatic basmati rice cooked with mixed vegetables and rich spices. Served with raita.' },
-  { id: 34, name: 'Peas Pulao', price: 160, category: 'Rice & Biryani', veg: true },
-
-  // Chinese
-  { id: 35, name: 'Veg Fried Rice', price: 180, category: 'Chinese', veg: true },
-  { id: 36, name: 'Veg Hakka Noodles', price: 180, category: 'Chinese', veg: true, popular: true },
-  { id: 37, name: 'Chilly Paneer Gravy', price: 240, category: 'Chinese', veg: true, spicy: 'Spicy' },
-  { id: 38, name: 'Veg Manchurian Gravy', price: 200, category: 'Chinese', veg: true },
-
-  // Desserts
-  { id: 39, name: 'Gulab Jamun (2 pcs)', price: 80, category: 'Desserts', veg: true, popular: true },
-  { id: 40, name: 'Rasgulla (2 pcs)', price: 70, category: 'Desserts', veg: true },
-  { id: 41, name: 'Ice Cream (Vanilla/Chocolate/Strawberry)', price: 90, category: 'Desserts', veg: true },
-  { id: 42, name: 'Special Kheer', price: 110, category: 'Desserts', veg: true },
-
-  // Beverages
-  { id: 43, name: 'Masala Tea', price: 30, category: 'Beverages', veg: true },
-  { id: 44, name: 'Coffee', price: 40, category: 'Beverages', veg: true },
-  { id: 45, name: 'Sweet Lassi', price: 80, category: 'Beverages', veg: true, popular: true },
-  { id: 46, name: 'Salted Lassi', price: 70, category: 'Beverages', veg: true },
-  { id: 47, name: 'Cold Coffee', price: 110, category: 'Beverages', veg: true },
-  { id: 48, name: 'Fresh Lime Soda', price: 60, category: 'Beverages', veg: true },
-  { id: 49, name: 'Packaged Drinking Water', price: 20, category: 'Beverages', veg: true },
-];
+function VegMark() {
+  return <span aria-label="Pure vegetarian" className="flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border-2 border-green-600"><span className="h-2 w-2 rounded-full bg-green-600" /></span>;
+}
 
 export default function Menu() {
-  useSEO({
-    title: 'Food Menu',
-    description: 'View the full pure vegetarian menu at Hotel Jatashankar — North Indian, South Indian, Chinese, thalis, and more, served in Chhatarpur.',
-    path: '/menu',
-  });
-
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredMenu = MENU_ITEMS.filter(item => {
-    const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
-    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          (item.desc && item.desc.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
+  const structuredData = useMemo(() => {
+    const menuSections = CATEGORY_NAMES.map((category) => ({
+      '@type': 'MenuSection',
+      name: category,
+      hasMenuItem: MENU_ITEMS.filter((item) => item.category === category).map((item) => ({
+        '@type': 'MenuItem',
+        name: item.name,
+        description: item.description,
+        keywords: item.keywords.join(', '),
+        suitableForDiet: 'https://schema.org/VegetarianDiet',
+        offers: { '@type': 'Offer', price: item.price, priceCurrency: 'INR', availability: 'https://schema.org/InStock' },
+      })),
+    }));
+    const itemList = MENU_ITEMS.map((item, position) => ({
+      '@type': 'ListItem', position: position + 1, name: item.name,
+      item: { '@type': 'MenuItem', name: item.name, description: item.description, offers: { '@type': 'Offer', price: item.price, priceCurrency: 'INR' } },
+    }));
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@id': `${SITE_URL}/#restaurant`, '@type': 'Restaurant', name: 'Hotel Jatashankar Restaurant',
+          description: 'Pure vegetarian family restaurant in Chhatarpur, Madhya Pradesh.', servesCuisine: ['North Indian', 'Punjabi', 'Vegetarian Indian'],
+          telephone: '+91-70006-17811', priceRange: '₹', menu: `${SITE_URL}/menu`,
+          address: { '@type': 'PostalAddress', addressLocality: 'Chhatarpur', addressRegion: 'Madhya Pradesh', postalCode: '471001', addressCountry: 'IN' },
+          hasMenu: { '@id': `${SITE_URL}/menu#menu` },
+        },
+        {
+          '@id': `${SITE_URL}/#localbusiness`, '@type': 'LocalBusiness', name: 'Hotel Jatashankar',
+          telephone: '+91-70006-17811', url: SITE_URL,
+          address: { '@type': 'PostalAddress', addressLocality: 'Chhatarpur', addressRegion: 'Madhya Pradesh', postalCode: '471001', addressCountry: 'IN' },
+        },
+        { '@id': `${SITE_URL}/menu#menu`, '@type': 'Menu', name: 'Hotel Jatashankar Pure Veg Restaurant Menu', hasMenuSection: menuSections },
+        { '@type': 'ItemList', name: 'Hotel Jatashankar Menu Items', numberOfItems: MENU_ITEMS.length, itemListElement: itemList },
+        { '@type': 'BreadcrumbList', itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Restaurant', item: `${SITE_URL}/restaurant` },
+          { '@type': 'ListItem', position: 3, name: 'Menu', item: `${SITE_URL}/menu` },
+        ] },
+        { '@type': 'FAQPage', mainEntity: FAQS.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) },
+      ],
+    };
+  }, []);
+
+  useSEO({
+    title: 'Best Veg Restaurant Menu in Chhatarpur',
+    description: 'Explore Hotel Jatashankar’s pure veg menu in Chhatarpur: veg thali, paneer, Punjabi, North Indian, lunch and dinner favourites.',
+    path: '/menu', image: '/restaurant-interior.jpg', structuredData,
+  });
+
+  const normalizedSearch = searchQuery.trim().toLowerCase();
+  const filteredItems = MENU_ITEMS.filter((item) => {
+    const categoryMatches = activeCategory === 'All' || item.category === activeCategory;
+    const searchMatches = !normalizedSearch || [item.name, item.description, item.category, ...item.keywords].join(' ').toLowerCase().includes(normalizedSearch);
+    return categoryMatches && searchMatches;
   });
 
   return (
-    <div className="w-full min-h-screen bg-background pt-24 pb-20">
-      
-      <section className="bg-primary text-primary-foreground py-16 md:py-20 bg-[url('/restaurant-interior.jpg')] bg-cover bg-center bg-blend-overlay">
+    <main className="min-h-screen bg-background pb-20 pt-24">
+      <section className="bg-primary bg-[url('/restaurant-interior.jpg')] bg-cover bg-center bg-blend-overlay py-14 text-primary-foreground md:py-20">
         <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-serif mb-4">Our Food Menu</h1>
-            <p className="max-w-2xl mx-auto text-primary-foreground/90 text-lg">
-              100% Pure Vegetarian Delicacies. Fresh ingredients, authentic spices, and hygienic preparation.
-            </p>
+          <nav aria-label="Breadcrumb" className="mb-5 flex justify-center gap-2 text-sm text-primary-foreground/80"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/restaurant">Restaurant</Link><span aria-hidden="true">/</span><span aria-current="page">Menu</span></nav>
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Hotel Jatashankar • Chhatarpur</p>
+            <h1 className="font-serif text-4xl md:text-5xl">Pure Veg Restaurant Menu</h1>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-foreground/90">A family-friendly Chhatarpur menu of vegetarian thalis, paneer favourites, Punjabi dishes, fresh breads, rice, snacks, and sweets.</p>
           </motion.div>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <a href="tel:+917000617811" className="inline-flex items-center gap-2 rounded-md bg-secondary px-4 py-2.5 font-semibold text-primary transition-colors hover:bg-secondary/90"><Phone className="h-4 w-4" />Call</a>
+            <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border border-white/60 px-4 py-2.5 font-semibold text-white transition-colors hover:bg-white/15"><MapPin className="h-4 w-4" />Get Directions</a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border border-white/60 px-4 py-2.5 font-semibold text-white transition-colors hover:bg-white/15"><MessageCircle className="h-4 w-4" />Order</a>
+            <a href="#menu" className="inline-flex items-center gap-2 rounded-md border border-white/60 px-4 py-2.5 font-semibold text-white transition-colors hover:bg-white/15"><Utensils className="h-4 w-4" />View Menu</a>
+          </div>
         </div>
       </section>
 
-      <section className="py-12 border-b border-border sticky top-[72px] z-30 bg-background/95 backdrop-blur shadow-sm">
+      <section id="menu" aria-label="Menu filters" className="sticky top-[72px] z-30 border-b border-border bg-background/95 py-5 shadow-sm backdrop-blur">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            {/* Search */}
-            <div className="relative w-full md:w-96">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input 
-                type="text" 
-                placeholder="Search dishes..." 
-                className="w-full bg-card border border-border rounded-full pl-10 pr-4 py-2 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-            
-            {/* Legend */}
-            <div className="flex gap-4 text-sm">
-              <span className="flex items-center gap-1 text-muted-foreground"><div className="w-3 h-3 rounded-full border border-green-600 flex items-center justify-center"><div className="w-1.5 h-1.5 bg-green-600 rounded-full"></div></div> Pure Veg</span>
-              <span className="flex items-center gap-1 text-secondary font-medium"><Sparkles className="w-4 h-4" /> Popular</span>
-              <span className="flex items-center gap-1 text-primary font-medium"><ChefHat className="w-4 h-4" /> Chef's Special</span>
-            </div>
-          </div>
-          
-          {/* Categories */}
-          <div className="flex overflow-x-auto gap-2 py-4 mt-4 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
-            {CATEGORIES.map(category => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  activeCategory === category 
-                    ? 'bg-secondary text-primary font-bold' 
-                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+          <label className="relative block max-w-xl" htmlFor="menu-search"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><span className="sr-only">Search the menu</span><input id="menu-search" type="search" placeholder="Search dishes, such as paneer, thali, naan..." className="w-full rounded-full border border-border bg-card py-2.5 pl-10 pr-4 focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} /></label>
+          <div className="-mx-4 mt-4 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:px-0" role="tablist" aria-label="Menu categories">
+            {['All', ...CATEGORY_NAMES].map((category) => <button key={category} type="button" role="tab" aria-selected={activeCategory === category} onClick={() => setActiveCategory(category)} className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors ${activeCategory === category ? 'bg-secondary font-bold text-primary' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}>{category}</button>)}
           </div>
         </div>
       </section>
 
-      <section className="py-12 container mx-auto px-4">
-        {filteredMenu.length === 0 ? (
-          <div className="text-center py-20">
-            <Info className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-xl font-medium text-foreground">No dishes found</h3>
-            <p className="text-muted-foreground mt-2">Try adjusting your search or category filter.</p>
-            <button 
-              onClick={() => {setSearchQuery(''); setActiveCategory('All');}}
-              className="mt-4 text-secondary underline hover:text-primary transition-colors"
-            >
-              Clear filters
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <AnimatePresence>
-              {filteredMenu.map((item, index) => (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.2 }}
-                  key={item.id}
-                  className="bg-card border border-border rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group"
-                >
-                  <div className="flex justify-between items-start mb-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-sm border-2 border-green-600 flex items-center justify-center shrink-0">
-                        <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                      </div>
-                      <h3 className="font-serif font-semibold text-lg text-foreground group-hover:text-primary transition-colors">{item.name}</h3>
-                    </div>
-                    <span className="font-semibold text-primary">₹{item.price}</span>
-                  </div>
-                  
-                  {item.desc && (
-                    <p className="text-sm text-muted-foreground mt-2 pr-4">{item.desc}</p>
-                  )}
-                  
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {item.popular && (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-secondary/20 text-secondary-foreground px-2 py-1 rounded">
-                        <Sparkles className="w-3 h-3" /> Popular
-                      </span>
-                    )}
-                    {item.chefReq && (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-1 rounded">
-                        <ChefHat className="w-3 h-3" /> Chef's Rec
-                      </span>
-                    )}
-                    {item.spicy && (
-                      <span className={`inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded ${
-                        item.spicy === 'Spicy' ? 'bg-red-100 text-red-700' : 'bg-orange-100 text-orange-700'
-                      }`}>
-                        {item.spicy}
-                      </span>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-        )}
+      <section className="container mx-auto px-4 py-10" aria-live="polite">
+        <div className="mb-6 flex items-center justify-between gap-4"><p className="text-sm text-muted-foreground">{filteredItems.length} vegetarian {filteredItems.length === 1 ? 'dish' : 'dishes'} shown</p><span className="flex items-center gap-2 text-sm text-muted-foreground"><VegMark />100% Pure Veg</span></div>
+        {filteredItems.length === 0 ? <div className="py-20 text-center"><Info className="mx-auto mb-4 h-12 w-12 text-muted-foreground" /><h2 className="text-xl font-semibold">No dishes found</h2><p className="mt-2 text-muted-foreground">Try a different dish name or select another category.</p><button type="button" onClick={() => { setSearchQuery(''); setActiveCategory('All'); }} className="mt-4 font-medium text-secondary underline">Clear filters</button></div> : <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">{filteredItems.map((item, index) => <motion.article key={item.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: Math.min(index, 8) * 0.03 }} className="group rounded-xl border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-md"><div className="flex items-start justify-between gap-4"><div className="flex items-start gap-2"><VegMark /><div><h2 className="font-serif text-lg font-semibold text-foreground group-hover:text-primary">{item.name}</h2><p className="mt-1 text-xs font-medium uppercase tracking-wide text-secondary">{item.category}</p></div></div><data value={item.price} className="shrink-0 font-semibold text-primary">₹{item.price}</data></div><p className="mt-4 text-sm leading-6 text-muted-foreground">{item.description}</p></motion.article>)}</div>}
       </section>
 
-      <div className="container mx-auto px-4 mt-8">
-        <div className="bg-muted rounded-xl p-6 text-center md:flex justify-between items-center">
-          <div className="text-left mb-4 md:mb-0">
-            <h4 className="font-serif text-lg text-primary font-bold">Ready to dine with us?</h4>
-            <p className="text-sm text-muted-foreground mt-1">Visit our family restaurant or order to your room.</p>
-          </div>
-          <div className="flex gap-4 justify-center">
-            <a href="tel:+917000617811" className="bg-white text-primary border border-primary px-6 py-2 rounded-md font-semibold text-sm hover:bg-muted transition-colors">Call to Order</a>
-            <Link href="/restaurant" className="bg-primary text-primary-foreground px-6 py-2 rounded-md font-semibold text-sm hover:bg-primary/90 transition-colors">Restaurant Info</Link>
-          </div>
-        </div>
-      </div>
+      <section className="border-y border-border bg-muted/40 py-12"><div className="container mx-auto px-4"><div className="mx-auto max-w-3xl"><p className="text-center text-sm font-semibold uppercase tracking-[0.16em] text-secondary">Menu FAQs</p><h2 className="mt-2 text-center font-serif text-3xl text-primary">Pure Veg Dining in Chhatarpur</h2><div className="mt-8 space-y-3">{FAQS.map((faq) => <details key={faq.question} className="rounded-lg border border-border bg-card p-5"><summary className="cursor-pointer font-semibold text-foreground">{faq.question}</summary><p className="mt-3 leading-7 text-muted-foreground">{faq.answer}</p></details>)}</div></div></div></section>
 
+      <section className="container mx-auto px-4 py-12"><div className="rounded-xl bg-primary p-6 text-primary-foreground md:flex md:items-center md:justify-between"><div><h2 className="font-serif text-2xl text-secondary">Planning lunch or dinner in Chhatarpur?</h2><p className="mt-2 text-primary-foreground/80">Explore our <Link href="/restaurant" className="underline">pure veg restaurant</Link>, see our <Link href="/nearby" className="underline">nearby attractions</Link>, or call for today’s availability.</p></div><div className="mt-5 flex flex-wrap gap-3 md:mt-0"><a href="tel:+917000617811" className="rounded-md bg-secondary px-5 py-2.5 font-semibold text-primary hover:bg-secondary/90">Call Restaurant</a><Link href="/contact" className="rounded-md border border-secondary px-5 py-2.5 font-semibold text-secondary hover:bg-secondary/10">Contact Us</Link></div></div></section>
       <FloatingCTAs />
-    </div>
+    </main>
   );
 }
