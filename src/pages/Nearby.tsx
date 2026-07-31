@@ -37,7 +37,7 @@ const ATTRACTIONS = [
   {
     name: 'Khajuraho Temples',
     distance: '45 km (approx. 1 hour drive)',
-    img: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    img: '/khajuraho-temples.jpeg',
     width: 800,
     height: 600,
     fallback: '/gallery-exterior-1.jpg',
@@ -47,7 +47,7 @@ const ATTRACTIONS = [
   {
     name: 'Raneh Falls',
     distance: '65 km (approx. 1.5 hours drive)',
-    img: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    img: '/raneh-falls.jpeg',
     width: 800,
     height: 600,
     fallback: '/gallery-exterior-1.jpg',
@@ -57,7 +57,7 @@ const ATTRACTIONS = [
   {
     name: 'Panna National Park',
     distance: '70 km (approx. 1.5 hours drive)',
-    img: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    img: '/panna-national-park.jpeg',
     width: 800,
     height: 600,
     fallback: '/gallery-exterior-1.jpg',
@@ -67,7 +67,7 @@ const ATTRACTIONS = [
   {
     name: 'Pandav Falls',
     distance: '55 km (approx. 1 hour 15 mins)',
-    img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    img: '/pandav-falls.jpeg',
     width: 800,
     height: 600,
     fallback: '/gallery-exterior-1.jpg',
@@ -77,7 +77,7 @@ const ATTRACTIONS = [
   {
     name: 'Ken Gharial Sanctuary',
     distance: '65 km (approx. 1.5 hours drive)',
-    img: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    img: '/ken-gharial-sanctuary.jpeg',
     width: 800,
     height: 600,
     fallback: '/gallery-exterior-1.jpg',
