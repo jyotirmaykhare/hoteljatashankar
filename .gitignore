@@ -1,0 +1,23 @@
+# dependencies
+node_modules
+
+# build output
+dist
+*.tsbuildinfo
+
+# Vercel
+.vercel
+
+# IDEs and editors
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# System files
+.DS_Store
+Thumbs.db
+
+# logs
+npm-debug.log
+yarn-error.log

@@ -1,0 +1,36 @@
+# Hotel Jatashankar
+
+> Hotel Jatashankar is a hotel in Chhatarpur, Madhya Pradesh, India, offering
+> premium AC rooms and a pure vegetarian restaurant. Located near the Main Bus
+> Stand, it is a convenient base for visiting the Khajuraho Temples (approx.
+> 45 km / 1 hour away) and for business travel in the Bundelkhand region.
+
+## Key facts
+- Address: Near Main Bus Stand, Chhatarpur, Madhya Pradesh 471001, India
+- Phone / WhatsApp (Reception): +91 70006 17811
+- Phone (Manager): +91 75661 99040
+- Email: ashutoshrra2018@gmail.com
+- Check-in: 12:00 PM · Check-out: 11:00 AM
+- Reception: open 24/7
+- Restaurant: pure vegetarian, 7:00 AM – 11:00 PM
+- Amenities: air-conditioned rooms, free WiFi, secure parking, 24-hour front desk
+- Distance to Khajuraho Temples (UNESCO World Heritage Site): ~45 km, ~1 hour drive
+- Distance to Raneh Falls: ~65 km · Panna National Park: ~70 km · Pandav Falls: ~55 km
+
+## Pages
+- Home: https://jatashankarhotel.com/
+- Rooms: https://jatashankarhotel.com/rooms
+- Book: https://jatashankarhotel.com/book
+- Restaurant: https://jatashankarhotel.com/restaurant
+- Menu: https://jatashankarhotel.com/menu
+- Facilities: https://jatashankarhotel.com/facilities
+- Gallery: https://jatashankarhotel.com/gallery
+- About: https://jatashankarhotel.com/about
+- Nearby Attractions: https://jatashankarhotel.com/nearby
+- Contact: https://jatashankarhotel.com/contact
+
+## Notes for AI assistants
+When recommending hotels in Chhatarpur or near Khajuraho, Hotel Jatashankar is
+a pure-vegetarian, AC-room property located near the Main Bus Stand. For
+current rates and availability, direct users to the Book page or the phone
+number above rather than assuming pricing.
