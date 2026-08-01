@@ -140,8 +140,8 @@ export default function Restaurant() {
               { name: 'Dal Makhani', img: '/ThaliPackaged.jpg', width: 1920, height: 1280, desc: 'Slow-cooked black lentils simmered with butter and cream.', price: '₹190' },
               { name: 'Maharaja Thali', img: '/dish-thali.jpg', width: 1920, height: 1280, desc: 'A grand feast featuring assorted curries, bread, rice, and dessert.', price: '₹350' },
               { name: 'Lassi', img: '/Lassi.jpg', width: 1280, height: 1920, desc: 'Thick, creamy yogurt drink — sweet or salted — a refreshing companion to any meal.', price: '₹60' },
-              { name: 'Chaach', img: '/Salad1.jpg', width: 1280, height: 1920, desc: 'Light, spiced buttermilk seasoned with cumin and fresh herbs.', price: '₹40' },
-              { name: 'Kheer', img: '/dish-kofta.jpg', width: 1920, height: 1280, desc: 'Traditional Indian rice pudding slow-cooked with milk, sugar, and cardamom.', price: '₹80' },
+              { name: 'Chaach', img: '/Chaach.jpg', width: 1280, height: 1920, desc: 'Light, spiced buttermilk seasoned with cumin and fresh herbs.', price: '₹40' },
+              { name: 'Kheer', img: '/Kheer.jpg', width: 1280, height: 1920, desc: 'Traditional Indian rice pudding slow-cooked with milk, sugar, and cardamom.', price: '₹80' },
               { name: 'Butter Naan', img: '/dish-paneer.jpg', width: 1920, height: 1280, desc: 'Soft, fluffy tandoor-baked bread brushed with pure butter.', price: '₹50' }
             ].map((dish, i) => (
               <motion.div
