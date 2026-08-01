@@ -6,13 +6,13 @@ import { useSEO } from '@/lib/seo';
 export default function About() {
   useSEO({
     title: 'About Us',
-    description: 'Learn the story behind Hotel Jatashankar — a family-run hotel in Chhatarpur blending traditional Indian hospitality with modern comforts near the Main Bus Stand.',
+    description: 'Learn the story behind Hotel Jatashankar — a family-run hotel in Chhatarpur blending traditional Indian hospitality with modern comforts on Mahoba Road, Near Bus Stand.',
     path: '/about',
   });
 
   return (
     <div className="w-full flex flex-col bg-background pt-24 pb-20">
-      
+
       {/* Header */}
       <section className="bg-primary text-primary-foreground py-16 md:py-24 bg-[url('/gallery-exterior-1.jpg')] bg-cover bg-center bg-blend-overlay">
         <div className="container mx-auto px-4 text-center">
@@ -33,7 +33,7 @@ export default function About() {
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -46,15 +46,15 @@ export default function About() {
                   Hotel Jatashankar was founded with a singular vision: to provide travelers arriving in Chhatarpur with a stay that feels both luxurious and intimately familiar, like a home away from home.
                 </p>
                 <p>
-                  Situated strategically near the Main Bus Stand, our hotel bridges the gap between historical reverence—serving as a comfortable base for pilgrims and tourists visiting the Khajuraho temples—and modern necessity, offering top-tier AC rooms and amenities for business professionals.
+                  Situated on Mahoba Road, Near Bus Stand, our hotel bridges the gap between historical reverence—serving as a comfortable base for pilgrims and tourists visiting the Khajuraho temples—and modern necessity, offering top-tier AC rooms and amenities for business professionals.
                 </p>
                 <p>
-                  We are deeply proud of our roots in Indian hospitality. This is reflected not just in our architecture's haveli-inspired warmth, but in the genuine smiles of our staff and the authentic flavors of our purely vegetarian restaurant. 
+                  We are deeply proud of our roots in Indian hospitality. This is reflected not just in our architecture's haveli-inspired warmth, but in the genuine smiles of our staff and the authentic flavors of our purely vegetarian restaurant.
                 </p>
               </div>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -62,12 +62,12 @@ export default function About() {
               className="relative"
             >
               <div className="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl relative z-10 w-4/5 ml-auto">
-                <img src="/gallery-lobby-1.jpg" alt="Hotel Lobby" className="w-full h-full object-cover" 
+                <img src="/gallery-lobby-1.jpg" alt="Hotel Lobby" className="w-full h-full object-cover"
                   width="1920" height="1280" loading="lazy" decoding="async"
                 />
               </div>
               <div className="absolute top-10 -left-4 lg:-left-10 w-2/3 aspect-square rounded-xl overflow-hidden shadow-xl z-20 border-8 border-background">
-                <img src="/restaurant-interior.jpg" alt="Restaurant Interior" className="w-full h-full object-cover" 
+                <img src="/restaurant-interior.jpg" alt="Restaurant Interior" className="w-full h-full object-cover"
                   width="1920" height="1280" loading="lazy" decoding="async"
                 />
               </div>

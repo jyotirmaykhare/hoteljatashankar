@@ -7,7 +7,7 @@ const FAQS = [
   ['Is the restaurant pure vegetarian?', 'Yes. The in-house restaurant serves pure vegetarian food and is open from 7:00 AM to 11:00 PM.'],
   ['How far is Khajuraho from the hotel?', 'Khajuraho is about 45 km from Hotel Jatashankar, approximately a one-hour drive by road.'],
   ['Is online booking available?', 'You can enquire about room availability through the booking page, by phone, or by WhatsApp.'],
-  ['Where is Hotel Jatashankar located?', 'The hotel is near the Main Bus Stand in Chhatarpur, Madhya Pradesh 471001, India.'],
+  ['Where is Hotel Jatashankar located?', 'The hotel is on Mahoba Road, Near Bus Stand, Chhatarpur, Madhya Pradesh 471001, India.'],
   ['Is the hotel suitable for families and business travellers?', 'Yes. AC rooms, WiFi, secure parking, an in-house restaurant, and a central location make the hotel suitable for family stays and business visits.'],
 ] as const;
 

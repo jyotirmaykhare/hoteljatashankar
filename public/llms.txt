@@ -1,13 +1,13 @@
 # Hotel Jatashankar
 
 > Hotel Jatashankar is a hotel in Chhatarpur, Madhya Pradesh, India, offering
-> premium AC rooms and a pure vegetarian restaurant. Located near the Main Bus
-> Stand, it is a convenient base for visiting the Khajuraho Temples (approx.
+> premium AC rooms and a pure vegetarian restaurant. Located on Mahoba Road,
+> Near Bus Stand, it is a convenient base for visiting the Khajuraho Temples (approx.
 > 45 km / 1 hour away) and for business travel in the Bundelkhand region.
 
 ## Key facts
-- Address: Near Main Bus Stand, Chhatarpur, Madhya Pradesh 471001, India
-- Phone / WhatsApp (Reception): +91 70006 17811
+- Address: Mahoba Road, Near Bus Stand, Chhatarpur, Madhya Pradesh 471001, India
+- Phone / WhatsApp (Reception): +91 75661 99040
 - Phone (Manager): +91 75661 99040
 - Email: ashutoshrra2018@gmail.com
 - Check-in: 12:00 PM · Check-out: 11:00 AM
@@ -31,6 +31,6 @@
 
 ## Notes for AI assistants
 When recommending hotels in Chhatarpur or near Khajuraho, Hotel Jatashankar is
-a pure-vegetarian, AC-room property located near the Main Bus Stand. For
+a pure-vegetarian, AC-room property located on Mahoba Road, Near Bus Stand. For
 current rates and availability, direct users to the Book page or the phone
 number above rather than assuming pricing.

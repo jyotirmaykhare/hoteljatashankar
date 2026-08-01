@@ -22,8 +22,8 @@ const ROOMS = [
     image: '/room-deluxe.jpg',
     imgWidth: 1280,
     imgHeight: 1920,
-    description: 'Upgraded spacious rooms with elegant interiors, premium bedding, and a cozy seating area for a more relaxed stay.',
-    occupancy: '2 Adults + 1 Child',
+    description: 'Upgraded spacious rooms with elegant interiors, premium bedding, and a cozy seating area for a more relaxed stay. Children up to 6 years are included in this package; additional charges apply for older children.',
+    occupancy: '2 Adults + 1 Child (up to 6 yrs free)',
     bedType: 'King Size Bed',
     price: 'Contact for pricing',
     amenities: ['Air Conditioning', 'Premium Attached Washroom', 'Hot/Cold Water', 'Free WiFi', 'Flat Screen TV', 'Seating Area', 'Tea/Coffee Maker', 'Room Service']
@@ -39,7 +39,7 @@ export default function Rooms() {
 
   return (
     <div className="w-full flex flex-col bg-background pt-24 pb-20">
-      
+
       {/* Header */}
       <section className="bg-primary text-primary-foreground py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
@@ -61,7 +61,7 @@ export default function Rooms() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="space-y-16">
             {ROOMS.map((room, index) => (
-              <motion.div 
+              <motion.div
                 key={room.id}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -71,9 +71,9 @@ export default function Rooms() {
               >
                 {/* Image */}
                 <div className="w-full lg:w-1/2 h-64 md:h-80 lg:h-auto relative overflow-hidden">
-                  <img 
-                    src={room.image} 
-                    alt={room.name} 
+                  <img
+                    src={room.image}
+                    alt={room.name}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                     width={room.imgWidth}
                     height={room.imgHeight}
@@ -90,7 +90,7 @@ export default function Rooms() {
                       {room.price}
                     </span>
                   </div>
-                  
+
                   <p className="text-muted-foreground mb-6 leading-relaxed">
                     {room.description}
                   </p>
@@ -119,15 +119,15 @@ export default function Rooms() {
                   </div>
 
                   <div className="flex flex-wrap gap-4 mt-auto">
-                    <a 
-                      href="https://wa.me/917566199040" 
-                      target="_blank" 
+                    <a
+                      href="https://wa.me/917566199040"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="bg-primary text-primary-foreground px-8 py-3 rounded-md font-semibold hover:bg-primary/90 transition-colors shadow-sm flex-1 md:flex-none text-center"
                     >
                       Enquire via WhatsApp
                     </a>
-                    <a 
+                    <a
                       href="tel:+917566199040"
                       className="bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/20 px-6 py-3 rounded-md font-semibold hover:bg-[#25D366] hover:text-white transition-colors flex items-center justify-center gap-2"
                     >

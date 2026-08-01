@@ -114,14 +114,14 @@ export default function Menu() {
         {
           '@id': `${SITE_URL}/#restaurant`, '@type': 'Restaurant', name: 'Hotel Jatashankar Restaurant',
           description: 'Pure vegetarian family restaurant in Chhatarpur, Madhya Pradesh.', servesCuisine: ['North Indian', 'Punjabi', 'Vegetarian Indian'],
-          telephone: '+91-70006-17811', priceRange: '₹', menu: `${SITE_URL}/menu`,
-          address: { '@type': 'PostalAddress', addressLocality: 'Chhatarpur', addressRegion: 'Madhya Pradesh', postalCode: '471001', addressCountry: 'IN' },
+          telephone: '+91-75661-99040', priceRange: '₹', menu: `${SITE_URL}/menu`,
+          address: { '@type': 'PostalAddress', streetAddress: 'Mahoba Road, Near Bus Stand', addressLocality: 'Chhatarpur', addressRegion: 'Madhya Pradesh', postalCode: '471001', addressCountry: 'IN' },
           hasMenu: { '@id': `${SITE_URL}/menu#menu` },
         },
         {
           '@id': `${SITE_URL}/#localbusiness`, '@type': 'LocalBusiness', name: 'Hotel Jatashankar',
-          telephone: '+91-70006-17811', url: SITE_URL,
-          address: { '@type': 'PostalAddress', addressLocality: 'Chhatarpur', addressRegion: 'Madhya Pradesh', postalCode: '471001', addressCountry: 'IN' },
+          telephone: '+91-75661-99040', url: SITE_URL,
+          address: { '@type': 'PostalAddress', streetAddress: 'Mahoba Road, Near Bus Stand', addressLocality: 'Chhatarpur', addressRegion: 'Madhya Pradesh', postalCode: '471001', addressCountry: 'IN' },
         },
         { '@id': `${SITE_URL}/menu#menu`, '@type': 'Menu', name: 'Hotel Jatashankar Pure Veg Restaurant Menu', hasMenuSection: menuSections },
         { '@type': 'ItemList', name: 'Hotel Jatashankar Menu Items', numberOfItems: MENU_ITEMS.length, itemListElement: itemList },

@@ -37,7 +37,7 @@ export default function Contact() {
               <div>
                 <h2 className="text-3xl font-serif text-primary mb-6">Get in Touch</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Hotel Jatashankar is centrally located near the Main Bus Stand in Chhatarpur, making it highly accessible for all travelers. Feel free to contact our 24/7 reception.
+                  Hotel Jatashankar is located on Mahoba Road, Near Bus Stand, Chhatarpur, making it highly accessible for all travelers. Feel free to contact our 24/7 reception.
                 </p>
               </div>
 
@@ -48,7 +48,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg text-foreground mb-1">Our Location</h3>
-                    <p className="text-muted-foreground text-sm">Near Main Bus Stand,<br />Chhatarpur, Madhya Pradesh 471001, India</p>
+                    <p className="text-muted-foreground text-sm">Mahoba Road, Near Bus Stand,<br />Chhatarpur, Madhya Pradesh 471001, India</p>
                     <a href="#map" className="text-secondary text-sm font-medium mt-2 inline-block hover:underline">View on Map</a>
                   </div>
                 </div>
@@ -59,7 +59,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg text-foreground mb-1">Phone & WhatsApp</h3>
-                    <p className="text-muted-foreground text-sm mb-1">Reception: +91 70006 17811</p>
+                    <p className="text-muted-foreground text-sm mb-1">Reception: +91 75661 99040</p>
                     <p className="text-muted-foreground text-sm mb-1">Manager: +91 75661 99040</p>
                     <p className="text-muted-foreground text-sm">Manager (Anil Kushwaha): +91 95893 32576</p>
                   </div>
@@ -132,7 +132,7 @@ export default function Contact() {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           className="w-full h-full"
-          title="Hotel Jatashankar Location — Near Main Bus Stand, Chhatarpur"
+          title="Hotel Jatashankar Location — Mahoba Road, Near Bus Stand, Chhatarpur"
         ></iframe>
       </section>
     </div>

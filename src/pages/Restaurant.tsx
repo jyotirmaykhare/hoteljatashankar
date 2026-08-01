@@ -17,13 +17,13 @@ export default function Restaurant() {
       acceptsReservations: 'True',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Near Main Bus Stand',
+        streetAddress: 'Mahoba Road, Near Bus Stand',
         addressLocality: 'Chhatarpur',
         addressRegion: 'Madhya Pradesh',
         postalCode: '471001',
         addressCountry: 'IN',
       },
-      telephone: '+91-70006-17811',
+      telephone: '+91-75661-99040',
       openingHours: 'Mo-Su 07:00-23:00',
       menu: 'https://jatashankarhotel.com/menu',
     },
@@ -136,9 +136,13 @@ export default function Restaurant() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { name: 'Paneer Butter Masala', img: '/Mixveg.jpg', width: 1280, height: 1920, desc: 'Soft cottage cheese cubes in a rich, creamy tomato gravy.', price: '₹260' },
+              { name: 'Matar Paneer', img: '/Mixveg.jpg', width: 1280, height: 1920, desc: 'Tender cottage cheese and green peas cooked in a spiced tomato-onion gravy.', price: '₹240' },
               { name: 'Dal Makhani', img: '/ThaliPackaged.jpg', width: 1920, height: 1280, desc: 'Slow-cooked black lentils simmered with butter and cream.', price: '₹190' },
-              { name: 'Maharaja Thali', img: '/dish-thali.jpg', width: 1920, height: 1280, desc: 'A grand feast featuring assorted curries, bread, rice, and dessert.', price: '₹350' }
+              { name: 'Maharaja Thali', img: '/dish-thali.jpg', width: 1920, height: 1280, desc: 'A grand feast featuring assorted curries, bread, rice, and dessert.', price: '₹350' },
+              { name: 'Lassi', img: '/Lassi.jpg', width: 1280, height: 1920, desc: 'Thick, creamy yogurt drink — sweet or salted — a refreshing companion to any meal.', price: '₹60' },
+              { name: 'Chaach', img: '/Salad1.jpg', width: 1280, height: 1920, desc: 'Light, spiced buttermilk seasoned with cumin and fresh herbs.', price: '₹40' },
+              { name: 'Kheer', img: '/dish-kofta.jpg', width: 1920, height: 1280, desc: 'Traditional Indian rice pudding slow-cooked with milk, sugar, and cardamom.', price: '₹80' },
+              { name: 'Butter Naan', img: '/dish-paneer.jpg', width: 1920, height: 1280, desc: 'Soft, fluffy tandoor-baked bread brushed with pure butter.', price: '₹50' }
             ].map((dish, i) => (
               <motion.div
                 key={i}

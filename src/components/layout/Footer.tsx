@@ -41,7 +41,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-4">
               <li className="flex gap-3 text-primary-foreground/80 text-sm">
                 <MapPin className="w-5 h-5 text-secondary shrink-0" />
-                <span>Near Main Bus Stand, Chhatarpur, Madhya Pradesh 471001, India</span>
+                <span>Mahoba Road, Near Bus Stand, Chhatarpur, Madhya Pradesh 471001, India</span>
               </li>
               <li className="flex gap-3 text-primary-foreground/80 text-sm items-center">
                 <Phone className="w-5 h-5 text-secondary shrink-0" />

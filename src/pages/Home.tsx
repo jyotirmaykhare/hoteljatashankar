@@ -24,7 +24,7 @@ const FAQS = [
   },
   {
     q: 'Where exactly is Hotel Jatashankar located?',
-    a: 'The hotel is located near the Main Bus Stand in Chhatarpur, Madhya Pradesh 471001, India, making it easily accessible for all travelers.',
+    a: 'The hotel is located on Mahoba Road, Near Bus Stand, Chhatarpur, Madhya Pradesh 471001, India, making it easily accessible for all travelers.',
   },
   {
     q: 'What time is check-in and check-out?',
@@ -47,7 +47,7 @@ const FAQS = [
 export default function Home() {
   useSEO({
     title: 'Hotel Jatashankar | Hotel in Chhatarpur & Veg Dining',
-    description: 'Stay at Hotel Jatashankar for premium AC rooms and pure veg dining near Chhatarpur Main Bus Stand. Call or WhatsApp today to book your comfortable stay.',
+    description: 'Stay at Hotel Jatashankar for premium AC rooms and pure veg dining on Mahoba Road, Near Bus Stand, Chhatarpur. Call or WhatsApp today to book your comfortable stay.',
     path: '/',
     structuredData: {
       '@context': 'https://schema.org',
@@ -94,7 +94,7 @@ export default function Home() {
               <span className="text-secondary">Premium AC Rooms &amp; Veg Dining</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 font-light drop-shadow">
-              Comfortable • Premium • Trusted. Experience refined Indian hospitality and pure vegetarian dining near the Main Bus Stand.
+              Comfortable • Premium • Trusted. Experience refined Indian hospitality and pure vegetarian dining on Mahoba Road, Near Bus Stand.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -157,7 +157,7 @@ export default function Home() {
                 A Legacy of Comfort in the Heart of Chhatarpur
               </h2>
               <p className="text-muted-foreground leading-relaxed text-lg">
-                Hotel Jatashankar blends traditional Indian hospitality with modern comforts. Strategically located near the Main Bus Stand, we offer a tranquil retreat for families, business travelers, and tourists alike.
+                Hotel Jatashankar blends traditional Indian hospitality with modern comforts. Located on Mahoba Road, Near Bus Stand, we offer a tranquil retreat for families, business travelers, and tourists alike.
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 Step into our refined spaces featuring warm amber lighting, handcrafted textures, and rich emerald accents. Whether you're here to visit the historic Khajuraho temples or for a business trip, our meticulously designed AC rooms and renowned pure vegetarian restaurant ensure a memorable stay.
@@ -170,7 +170,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Prime Location</h3>
-                    <p className="text-sm text-muted-foreground mt-1">Steps away from Main Bus Stand</p>
+                    <p className="text-sm text-muted-foreground mt-1">Mahoba Road, Near Bus Stand</p>
                   </div>
                 </div>
                 <div className="flex gap-4 items-start">
@@ -352,7 +352,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-serif text-primary">Your Hotel in Chhatarpur for Every Journey</h2>
           </div>
           <article className="space-y-5 text-muted-foreground leading-relaxed text-base md:text-lg">
-            <p>Hotel Jatashankar is a welcoming hotel in Chhatarpur for families, business travellers and visitors exploring Madhya Pradesh. Near the Main Bus Stand, our location makes arrivals, local travel and onward journeys simple. Guests can choose a comfortable stay in well-kept premium AC rooms with everyday essentials, including WiFi, secure parking and attentive 24-hour reception support.</p>
+            <p>Hotel Jatashankar is a welcoming hotel in Chhatarpur for families, business travellers and visitors exploring Madhya Pradesh. Located on Mahoba Road, Near Bus Stand, our location makes arrivals, local travel and onward journeys simple. Guests can choose a comfortable stay in well-kept premium AC rooms with everyday essentials, including WiFi, secure parking and attentive 24-hour reception support.</p>
             <p>Whether you are in town for work, visiting relatives or planning a trip towards Khajuraho, our team focuses on a relaxed customer experience from check-in to departure. Families appreciate a convenient central location and a calm place to rest, while business guests can stay connected and reach meetings around Chhatarpur with ease. Explore our <Link href="/rooms" className="font-semibold text-primary hover:text-secondary underline underline-offset-4">AC room options</Link> to find the right space for your visit.</p>
             <p>Dining is an important part of the Hotel Jatashankar experience. Our in-house pure veg restaurant serves vegetarian food in a family-friendly setting, with options for a meal, a quick bite or a relaxed dinner. View the <Link href="/restaurant" className="font-semibold text-primary hover:text-secondary underline underline-offset-4">restaurant details</Link> and <Link href="/menu" className="font-semibold text-primary hover:text-secondary underline underline-offset-4">food menu</Link> before you arrive. The combination of rooms and restaurant service makes the hotel convenient for guests who want stay and dining choices in one place.</p>
             <p>Chhatarpur is also a useful base for nearby attractions. Khajuraho is approximately 45 km away by road, while local places of interest can be planned from the hotel. Visit our <Link href="/nearby" className="font-semibold text-primary hover:text-secondary underline underline-offset-4">nearby attractions guide</Link> for travel inspiration, or use the <Link href="/contact" className="font-semibold text-primary hover:text-secondary underline underline-offset-4">contact page</Link> for location and stay enquiries. For availability, you can <Link href="/book" className="font-semibold text-primary hover:text-secondary underline underline-offset-4">book a room</Link>, call, or message us on WhatsApp.</p>
