@@ -19,9 +19,9 @@ const ROOMS = [
   {
     id: 'deluxe',
     name: 'Deluxe AC Room',
-    image: '/room-deluxe.jpg',
-    imgWidth: 1280,
-    imgHeight: 1920,
+    image: '/room-deluxe.png',
+    imgWidth: 1024,
+    imgHeight: 1536,
     description: 'Upgraded spacious rooms with elegant interiors, premium bedding, and a cozy seating area for a more relaxed stay. Children up to 6 years are included in this package; additional charges apply for older children.',
     occupancy: '2 Adults + 1 Child (up to 6 yrs free)',
     bedType: 'King Size Bed',
