@@ -13,7 +13,7 @@ const IMAGES = [
   { id: 4, src: '/gallery-lobby-1.jpg', width: 1920, height: 1280, category: 'Exterior & Lobby', title: 'Elegant Reception Area' },
   { id: 5, src: '/gallery-lobby-2.jpg', width: 1920, height: 1280, category: 'Exterior & Lobby', title: 'Comfortable Lobby Seating' },
   { id: 6, src: '/Reception1.jpg', width: 1920, height: 1280, category: 'Exterior & Lobby', title: 'Reception Desk' },
-  { id: 7, src: '/room-standard.jpg', width: 1920, height: 1280, category: 'Rooms', title: 'Standard AC Room' },
+  { id: 7, src: '/room-standard.png', width: 1600, height: 1200, category: 'Rooms', title: 'Standard AC Room' },
   { id: 8, src: '/room-deluxe.jpg', width: 1280, height: 1920, category: 'Rooms', title: 'Deluxe AC Room' },
   { id: 13, src: '/gallery-restaurant-1.jpg', width: 1920, height: 1280, category: 'Restaurant & Food', title: 'Family Restaurant Interior' },
   { id: 14, src: '/dish-thali.jpg', width: 1920, height: 1280, category: 'Restaurant & Food', title: 'Premium Maharaja Thali' },

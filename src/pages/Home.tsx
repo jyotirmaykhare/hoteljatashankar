@@ -208,7 +208,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { id: 'standard', name: 'Standard AC Room', img: '/room-standard.jpg', width: 1920, height: 1280, desc: 'Comfortable stay with all essential amenities.' },
+              { id: 'standard', name: 'Standard AC Room', img: '/room-standard.png', width: 1600, height: 1200, desc: 'Comfortable stay with all essential amenities.' },
               { id: 'deluxe', name: 'Deluxe AC Room', img: '/room-deluxe.jpg', width: 1280, height: 1920, desc: 'Spacious room with upgraded furnishings.' }
             ].map((room, i) => (
               <motion.div

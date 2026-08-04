@@ -7,9 +7,9 @@ const ROOMS = [
   {
     id: 'standard',
     name: 'Standard AC Room',
-    image: '/room-standard.jpg',
-    imgWidth: 1920,
-    imgHeight: 1280,
+    image: '/room-standard.png',
+    imgWidth: 1600,
+    imgHeight: 1200,
     description: 'Perfect for solo travelers or couples looking for a comfortable and budget-friendly stay without compromising on quality and hygiene.',
     occupancy: '2 Adults',
     bedType: 'Queen Size Bed',
